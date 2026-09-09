@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assist Tracker - Final</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginBox" class="login">
+<h2>🔐 Assist Tracker</h2>
+<input id="loginUser" placeholder="Username (ex: devi)">
+<input id="loginPass" type="password" placeholder="Password">
+<input id="loginPin" placeholder="Admin Secret PIN - 9999" style="display:none">
+<button class="btn" onclick="doLogin()">Login</button>
+<p style="margin-top:16px;font-size:13px">
+<a href="#" onclick="openRequestModal();return false;" style="color:#4f46e5;font-weight:bold;text-decoration:none">🔗 Request your manager to provide the access</a>
+</p>
+<p id="loginMsg" style="color:red;font-size:13px"></p>
+</div>
+
+<!-- REQUEST MODAL -->
+<div class="modal" id="requestModal" onclick="if(event.target==this)closeRequestModal()">
+<div class="modal-content" style="max-width:420px">
+<h3>📩 Request Access to Manager</h3>
+<input id="reqName" placeholder="Full Name">
+<input id="reqUsername" placeholder="Desired Username">
+<input id="reqEmail" type="email" placeholder="Your Email">
+<textarea id="reqReason" placeholder="Team / Reason"></textarea>
+<button class="btn" onclick="submitRequest()">Send Request</button>
+<button onclick="closeRequestModal()" style="background:#eee;width:100%;margin-top:8px">Cancel</button>
+<p id="reqMsg" style="font-size:13px;margin-top:8px"></p>
+</div>
+</div>
+
+<!-- MAIN -->
+<div id="mainBox" class="card" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+<h2 style="margin:0">🚀 Assist Tracker</h2>
+<div><b id="who"></b> <button onclick="logout()" style="background:#ef4444;color:#fff;margin-left:8px">Logout</button></div>
+</div>
+
+<div id="adminBar" style="display:none">
+<div class="admin-search">
+<input id="searchName" placeholder="🔍 Check anyone: devi, priya...">
+<button onclick="openProfile(searchName.value)" style="background:#4f46e5;color:#fff">Check Analytics</button>
+<button onclick="loadLogs()" style="background:#10b981;color:#fff">All Logs</button>
+</div>
+<div id="adminRequests" class="req-box"></div>
+<div style="background:#e0f2fe;padding:12px;border-radius:10px;margin:10px 0">
+<b>👑 Admin - Create User:</b>
+<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+<input id="newU" placeholder="username" style="flex:1">
+<input id="newP" placeholder="password" style="flex:1">
+<button onclick="adminCreateUser()" style="background:#0ea5e9;color:#fff">Create</button>
+</div>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><div id="totalHelps">0</div><small>Entries</small></div>
+<div class="stat"><div id="totalHours">0</div><small>Time</small></div>
+<div class="stat"><div id="topHelper">0%</div><small>Cap</small></div>
+</div>
+
+<input id="id" type="hidden">
+<input id="helpedTo" placeholder="Evariki Help Chesav?">
+<select id="issueType"><option>Bug Fix</option><option>Code Review</option><option>Deployment</option><option>Concept Explain</option><option>Self Work</option><option>Other</option></select>
+<textarea id="description" placeholder="Work details..."></textarea>
+<input id="timeSpentMinutes" type="number" placeholder="Time in mins (ex: 30)">
+<button class="btn" onclick="saveLog()" id="saveBtn">💾 Save My Help</button>
+
+<table id="logsTable"></table>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal" onclick="if(event.target==this)closeModal()">
+<div class="modal-content">
+<h2 id="profileName"></h2>
+<div id="profileStats" style="background:#f8fafc;padding:12px;border-radius:10px;margin:10px 0;font-size:13px"></div>
+<canvas id="pieChart" height="200"></canvas>
+<h4>📋 Related Logs:</h4>
+<div id="profileLogs" style="max-height:220px;overflow:auto"></div>
+<button onclick="closeModal()" style="background:#4f46e5;color:#fff;width:100%;margin-top:10px">Close</button>
+</div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/request.js"></script>
+<script src="js/tracker.js"></script>
+</body>
+</html>
