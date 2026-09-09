@@ -19,69 +19,142 @@ public class AccessRequestController {
     @Autowired private UserRepository userRepo;
     @Autowired private JavaMailSender mailSender;
 
-    @PostMapping
-    public Map<String,Object> create(@RequestBody AccessRequest req) {
-        System.out.println("New request from: " + req.getRequestedUsername());
+    // @PostMapping
+    // public Map<String,Object> create(@RequestBody AccessRequest req) {
+    //     System.out.println("New request from: " + req.getRequestedUsername());
         
-        // Save request to DB - ee code unte unchay
-        // ... nee existing save logic ...
-        //     public Map<String,Object> create(@RequestBody AccessRequest req) {
+    //     // Save request to DB - ee code unte unchay
+    //     // ... nee existing save logic ...
+    //     //     public Map<String,Object> create(@RequestBody AccessRequest req) {
         
-        // System.out.println("New request from: " + req.getRequestedUsername());
-        // DB save logic - nee repository.save(req) unda chudu
+    //     // System.out.println("New request from: " + req.getRequestedUsername());
+    //     // DB save logic - nee repository.save(req) unda chudu
 
-        // Mail background lo
-        try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setTo("priyanka.sekhar.kommana@gmail.com");
-            msg.setSubject("New Access Request - " + req.getRequestedUsername());
-            msg.setText("Hi Priyanka,\n\nNew request: " + req.getFullName() + 
-                        "\nUsername: " + req.getRequestedUsername() +
-                        "\nEmail: " + req.getEmail() +
-                        "\nReason: " + req.getReason());
+    //     // Mail background lo
+    //     try {
+    //         SimpleMailMessage msg = new SimpleMailMessage();
+    //         msg.setTo("priyanka.sekhar.kommana@gmail.com");
+    //         msg.setSubject("New Access Request - " + req.getRequestedUsername());
+    //         msg.setText("Hi Priyanka,\n\nNew request: " + req.getFullName() + 
+    //                     "\nUsername: " + req.getRequestedUsername() +
+    //                     "\nEmail: " + req.getEmail() +
+    //                     "\nReason: " + req.getReason());
             
-            new Thread(() -> {
-                try { mailSender.send(msg); System.out.println("Mail SENT!"); } 
-                catch(Exception e){ System.out.println("Mail FAILED: "+e.getMessage()); }
-            }).start();
+    //         new Thread(() -> {
+    //             try { mailSender.send(msg); System.out.println("Mail SENT!"); } 
+    //             catch(Exception e){ System.out.println("Mail FAILED: "+e.getMessage()); }
+    //         }).start();
             
-        } catch(Exception e){ System.out.println("Mail prep error: "+e.getMessage()); }
+    //     } catch(Exception e){ System.out.println("Mail prep error: "+e.getMessage()); }
 
-        return Map.of("success",true,"msg","Request sent! Manager notified");
-    }
-        // return Map.of("success",true,"msg","Request sent! Manager notified at priyanka.sekhar.kommana@gmail.com");
-        // if(userRepo.findByUsername(req.getRequestedUsername().toLowerCase()).isPresent()){
-        //     return Map.of("success",false,"msg","Username already exists!");
-        // }
-        // req.setStatus("PENDING");
-        // reqRepo.save(req);
+    //     return Map.of("success",true,"msg","Request sent! Manager notified");
+    // }
+    //     // return Map.of("success",true,"msg","Request sent! Manager notified at priyanka.sekhar.kommana@gmail.com");
+    //     // if(userRepo.findByUsername(req.getRequestedUsername().toLowerCase()).isPresent()){
+    //     //     return Map.of("success",false,"msg","Username already exists!");
+    //     // }
+    //     // req.setStatus("PENDING");
+    //     // reqRepo.save(req);
 
-        // try {
-        //     SimpleMailMessage msg = new SimpleMailMessage();
-        //     msg.setTo("priyanka.sekhar.kommana@gmail.com"); // Manager Mail
-        //     msg.setSubject("New Access Request - " + req.getRequestedUsername());
-        //     msg.setText("Hi Priyanka,\n\nNew access request received:\n\nName: " + req.getFullName() + 
-        //                 "\nUsername: " + req.getRequestedUsername() + 
-        //                 "\nEmail: " + req.getEmail() + 
-        //                 "\nReason: " + req.getReason() + 
-        //                 "\n\nPlease login to Admin Dashboard to Approve.\n\n- AssistSync");
-        //     // Mail background lo pampistunnam - app hang avvadhu
-        //     new Thread(() -> {
-        //         try {
-        //             mailSender.send(msg);
-        //             System.out.println("Mail sent successfully!");
-        //         } catch (Exception e) {
-        //             System.out.println("Mail failed: " + e.getMessage());
-        //             e.printStackTrace();
-        //         }
-        //     }).start();
-        //     System.out.println("Mail sent to priyanka.sekhar.kommana@gmail.com");
-        // } catch (Exception e) {
-        //     System.out.println("Mail Error: " + e.getMessage());
-        // }
-        // return Map.of("success",true,"msg","Request sent! Manager notified at priyanka.sekhar.kommana@gmail.com");
+    //     // try {
+    //     //     SimpleMailMessage msg = new SimpleMailMessage();
+    //     //     msg.setTo("priyanka.sekhar.kommana@gmail.com"); // Manager Mail
+    //     //     msg.setSubject("New Access Request - " + req.getRequestedUsername());
+    //     //     msg.setText("Hi Priyanka,\n\nNew access request received:\n\nName: " + req.getFullName() + 
+    //     //                 "\nUsername: " + req.getRequestedUsername() + 
+    //     //                 "\nEmail: " + req.getEmail() + 
+    //     //                 "\nReason: " + req.getReason() + 
+    //     //                 "\n\nPlease login to Admin Dashboard to Approve.\n\n- AssistSync");
+    //     //     // Mail background lo pampistunnam - app hang avvadhu
+    //     //     new Thread(() -> {
+    //     //         try {
+    //     //             mailSender.send(msg);
+    //     //             System.out.println("Mail sent successfully!");
+    //     //         } catch (Exception e) {
+    //     //             System.out.println("Mail failed: " + e.getMessage());
+    //     //             e.printStackTrace();
+    //     //         }
+    //     //     }).start();
+    //     //     System.out.println("Mail sent to priyanka.sekhar.kommana@gmail.com");
+    //     // } catch (Exception e) {
+    //     //     System.out.println("Mail Error: " + e.getMessage());
+    //     // }
+    //     // return Map.of("success",true,"msg","Request sent! Manager notified at priyanka.sekhar.kommana@gmail.com");
     
 
+//     @PostMapping
+// public Map<String,Object> create(@RequestBody AccessRequest req) {
+//     System.out.println("New request from: " + req.getRequestedUsername());
+    
+//     if(userRepo.findByUsername(req.getRequestedUsername().toLowerCase()).isPresent()){
+//         return Map.of("success",false,"msg","Username already exists!");
+//     }
+//     req.setStatus("PENDING");
+//     reqRepo.save(req);  // <-- IDHI LEKAPOTHE SAVE AVVADU BRO!
+
+//     try {
+//         SimpleMailMessage msg = new SimpleMailMessage();
+//         msg.setTo("priyanka.sekhar.kommana@gmail.com");
+//         msg.setSubject("New Access Request - " + req.getRequestedUsername());
+//         msg.setText("Hi Priyanka,\n\nNew request: " + req.getFullName() + 
+//                     "\nUsername: " + req.getRequestedUsername() +
+//                     "\nEmail: " + req.getEmail() +
+//                     "\nReason: " + req.getReason());
+        
+//         new Thread(() -> {
+//             try { mailSender.send(msg); System.out.println("Mail SENT!"); } 
+//             catch(Exception e){ System.out.println("Mail FAILED: "+e.getMessage()); }
+//         }).start();
+        
+//     } catch(Exception e){ System.out.println("Mail prep error: "+e.getMessage()); }
+
+//     return Map.of("success",true,"msg","Request sent! Manager notified");
+// }
+// @PostMapping
+// public Map<String,Object> create(@RequestBody AccessRequest req) {
+//     System.out.println("New request from: " + req.getRequestedUsername());
+    
+//     if(userRepo.findByUsername(req.getRequestedUsername().toLowerCase()).isPresent()){
+//         return Map.of("success",false,"msg","Username already exists! Use different name");
+//     }
+//     req.setStatus("PENDING");
+//     reqRepo.save(req);  // IDHI MUST!
+
+//     System.out.println("Saved to DB successfully!");
+//     return Map.of("success",true,"msg","Request sent! Manager notified");
+// }
+@PostMapping
+public Map<String,Object> create(@RequestBody AccessRequest req) {
+    if(userRepo.findByUsername(req.getRequestedUsername().toLowerCase()).isPresent()){
+        return Map.of("success",false,"msg","Username already exists!");
+    }
+    req.setStatus("PENDING");
+    reqRepo.save(req);
+
+    // Mail background lo - API hang avvadu
+    try {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo("priyanka.sekhar.kommana@gmail.com");
+        msg.setFrom("priyanka.sekhar.kommana@gmail.com");
+        msg.setSubject("New Access Request - " + req.getRequestedUsername());
+        msg.setText("Hi Priyanka,\n\nName: " + req.getFullName() + 
+                    "\nUsername: " + req.getRequestedUsername() +
+                    "\nEmail: " + req.getEmail() +
+                    "\nReason: " + req.getReason());
+
+        new Thread(() -> {
+            try { 
+                mailSender.send(msg); 
+                System.out.println("Mail SENT! to Priyanka");
+            } catch(Exception e){ 
+                System.out.println("Mail FAILED: "+e.getMessage());
+                e.printStackTrace();
+            }
+        }).start();
+    } catch(Exception e){ System.out.println("Mail prep error: "+e.getMessage()); }
+
+    return Map.of("success",true,"msg","Request sent! Manager notified");
+}
     @GetMapping
     
     public List<AccessRequest> getAll() { return reqRepo.findAll(); }
